@@ -27,6 +27,9 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	notified: {
+		type: Boolean,
+	},
 });
 
 module.exports = mongoose.model('Plant', schema);
