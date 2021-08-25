@@ -23,7 +23,7 @@ module.exports = {
 		const channel = guild.channels.cache.get('879843545165471784');
 
 		const date = moment().utc().format('HH:mm');
-		console.log(data);
+		console.log(date);
 		console.log(group1Hours.includes(date));
 		console.log(group2Hours.includes(date));
 		console.log(group3Hours.includes(date));
