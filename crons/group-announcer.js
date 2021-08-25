@@ -20,7 +20,7 @@ module.exports = {
 	cron: '*/40 * * * *',
 	execute: async (client, Discord) => {
 		const guild = client.guilds.cache.get('879653561665986611');
-		const channel = guild.channels.cache.get('879775992711876649');
+		const channel = guild.channels.cache.get('879843545165471784');
 
 		const date = moment().utc().format('HH:mm');
 
