@@ -23,17 +23,30 @@ module.exports = {
 		const channel = guild.channels.cache.get('879843545165471784');
 
 		const date = moment().utc().format('HH:mm');
+		console.log(data);
+		console.log(group1Hours.includes(date));
+		console.log(group2Hours.includes(date));
+		console.log(group3Hours.includes(date));
+		console.log(group4Hours.includes(date));
 
 		if (group1Hours.includes(date))
-			channel.send(`<@&${'879774447211515944'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`);
+			return await channel.send(
+				`<@&${'879774447211515944'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
+			);
 
 		if (group2Hours.includes(date))
-			channel.send(`<@&${'879774496599445544'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`);
+			return await channel.send(
+				`<@&${'879774496599445544'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
+			);
 
 		if (group3Hours.includes(date))
-			channel.send(`<@&${'879774522801291264'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`);
+			return await channel.send(
+				`<@&${'879774522801291264'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
+			);
 
 		if (group4Hours.includes(date))
-			channel.send(`<@&${'879979445149130782'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`);
+			return await channel.send(
+				`<@&${'879979445149130782'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
+			);
 	},
 };
