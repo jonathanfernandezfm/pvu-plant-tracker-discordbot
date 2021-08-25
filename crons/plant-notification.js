@@ -16,7 +16,7 @@ module.exports = {
 			sort: { time: 1 },
 			limit: 10,
 		});
-		console.log(plants);
+		// console.log(plants);
 
 		plants.forEach(async (plant) => {
 			const dateEnds = new Date(plant.time);
