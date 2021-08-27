@@ -15,7 +15,7 @@ module.exports = {
 			const price = response.data[0].current_price;
 			const change = response.data[0].price_change_percentage_24h;
 
-			return channel.setName(`asd | ${price}$ (${change.toFixed(2)}%)`).catch((err) => {
+			return channel.setName(`💲 | ${price}$ (${change.toFixed(2)}%)`).catch((err) => {
 				console.log(err);
 			});
 		} catch (err) {
