@@ -16,7 +16,6 @@ module.exports = {
 			sort: { time: 1 },
 			limit: 10,
 		});
-		// console.log(plants);
 
 		plants.forEach(async (plant) => {
 			const dateEnds = new Date(plant.time);
@@ -31,7 +30,6 @@ module.exports = {
 						'https://cryptoshitcompra.com/wp-content/uploads/2021/07/pvufarm-850x550.png'
 					)
 					.addField('Id', plant.id_plant)
-					// .addField('Land', '[Click here](' + plant.url + ')')
 					.addField('Plant', '[Click here](' + plant.url + ')')
 					.addField('Coordinates', `${plant.coordinate_x} ${plant.coordinate_y}`)
 					.addField(
@@ -62,9 +60,6 @@ module.exports = {
 				await channel.send(embedPlant);
 
 				const updated = await Plant.updateOne({ id_plant: plant.id_plant }, { notified: true }, { new: true });
-				// console.log(updated, 'less than 5 min plant');
-			} else {
-				// console.log('more than 5 min plant');
 			}
 		});
 	},

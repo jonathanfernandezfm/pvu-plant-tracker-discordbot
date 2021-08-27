@@ -6,7 +6,6 @@ module.exports = {
 	cron: '*/60 * * * *',
 	execute: async (client, Discord) => {
 		const count = await Plant.countDocuments();
-		console.log(count);
 
 		client.user.setPresence({
 			activity: {
