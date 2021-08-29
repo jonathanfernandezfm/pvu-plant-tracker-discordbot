@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+	owner: {
+		type: String,
+	},
 	url: {
 		type: String,
 	},
@@ -15,6 +18,9 @@ const schema = new mongoose.Schema({
 		type: Date,
 		required: true,
 	},
+	harvest_time: {
+		type: Date,
+	},
 	coordinate_x: {
 		type: String,
 		required: true,
@@ -28,6 +34,9 @@ const schema = new mongoose.Schema({
 		required: true,
 	},
 	notified: {
+		type: Boolean,
+	},
+	notified_harvest: {
 		type: Boolean,
 	},
 });

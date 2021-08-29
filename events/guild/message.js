@@ -37,14 +37,20 @@ const cooldowns = new Map();
 module.exports = async (Discord, client, message) => {
 	const prefix = '!';
 
+	//////////// CONSUMER MESSAGES ////////////
+
+	const consumer = client.consumers.get(message.channel.id);
+	if (consumer) return consumer.execute(message, client, Discord);
+
+	/////////////////////////////////////
+
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const cmd = args.shift().toLowerCase();
 
 	const command =
-		client.commands.get(cmd) ||
-		client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
+		client.commands.get(cmd) || client.commands.find((command) => command.aliases && command.aliases.includes(cmd));
 
 	if (!command) return;
 
@@ -77,9 +83,7 @@ module.exports = async (Discord, client, message) => {
 		if (currentTime < expirationTime) {
 			const timeLeft = (expirationTime - currentTime) / 1000;
 
-			return message.reply(
-				`Wait ${timeLeft.toFixed(1)} seconds before using command \`${command.name}\` again`
-			);
+			return message.reply(`Wait ${timeLeft.toFixed(1)} seconds before using command \`${command.name}\` again`);
 		}
 	}
 

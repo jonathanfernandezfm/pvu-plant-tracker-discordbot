@@ -7,7 +7,7 @@ module.exports = (client, Discord) => {
 	for (const file of cron_files) {
 		const cron = require(`../crons/${file}`);
 
-		if (cron.name)
+		if (cron.name && cron.dev)
 			nodecron.schedule(cron.cron, () => {
 				cron.execute(client, Discord);
 			});
