@@ -41,8 +41,10 @@ module.exports = {
 			}
 		});
 
+		const idPlants = await Promise.all(ids);
 		if (!user.plants) user.plants = [];
-		user.plants = [...new Set([...user.plants, ...ids])];
+		user.plants = [...new Set([...user.plants, ...idPlants])];
+
 		await user.save();
 	},
 };
