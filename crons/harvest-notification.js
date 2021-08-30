@@ -6,7 +6,6 @@ const moment = require('moment');
 module.exports = {
 	name: 'harvest-notification',
 	description: 'Send next harvestable plant to owner',
-	dev: true,
 	cron: '*/1 * * * *',
 	execute: async (client, Discord) => {
 		const plants = await Plant.find({ harvest_time: { $gte: new Date() }, notified_harvest: null }, null, {
