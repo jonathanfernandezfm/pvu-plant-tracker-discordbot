@@ -1,6 +1,6 @@
 const User = require('../models/User');
-const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
+const plantsEmbed = require('../embeds/plants');
 
 const plantUrl = 'https://marketplace.plantvsundead.com/#/farm/';
 
@@ -11,8 +11,6 @@ module.exports = {
 	help: '!personal-plants',
 	execute: async (msg, args, client, Discord) => {
 		const users = await User.find({ 'plants.time': { $lte: new Date() } });
-
-		console.log(users);
 
 		const arrayOfUrls = [];
 		users.forEach((user) => {
@@ -31,17 +29,9 @@ module.exports = {
 
 		if (!arrayOfUrls.length) return msg.reply('No plants');
 
-		const embedPlant = new MessageEmbed()
-			.setTitle('Plants to analize')
-			.setColor('#22ff22')
-			.setAuthor(
-				'PvU Plant Tracker',
-				'https://cryptoshitcompra.com/wp-content/uploads/2021/07/pvufarm-850x550.png'
-			)
-			.setDescription(arrayOfUrls.join('\n'))
-			.setTimestamp();
+		msg.channel.send(plantsEmbed.toAnalize(arrayOfUrls));
 
-		msg.channel.send(embedPlant);
+		console.log(users);
 		console.log(arrayOfUrls);
 	},
 };

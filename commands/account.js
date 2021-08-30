@@ -10,7 +10,6 @@ module.exports = {
 		if (args.length == 0) return msg.channel.send('Correct format `!set-account {wallet}`');
 
 		const account = args[0];
-
 		const userUpdated = await User.findOneAndUpdate({ user: msg.author.id }, { wallet: account });
 
 		if (!userUpdated) {
