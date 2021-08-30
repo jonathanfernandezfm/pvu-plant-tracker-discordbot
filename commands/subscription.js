@@ -6,7 +6,6 @@ module.exports = {
 	name: 'subscription',
 	description: 'Manage subscriptions',
 	permissions: ['ADMINISTRATOR'],
-	aliases: ['sub'],
 	help: '!subscription',
 	execute: async (msg, args, client, Discord) => {
 		const mentions = msg.mentions.members;
