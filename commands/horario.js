@@ -5,9 +5,9 @@ module.exports = {
 	cooldown: 120,
 	help: '!schedule',
 	execute: async (msg, args, client, Discord) => {
-		const file = 'horario-25-08.png';
+		const file = 'horario-30-08.png';
 
 		const attachment = new Discord.MessageAttachment(`./assets/${file}`, 'schedule.png');
-		msg.channel.send('**Updated: 25/08**', attachment).catch(console.error);
+		msg.channel.send('**Updated: 30/08**', attachment).catch(console.error);
 	},
 };
