@@ -1,47 +1,48 @@
 const moment = require('moment');
 
-const group1Hours = ['00:40', '03:40', '06:40', '09:40', '12:40', '15:40', '18:40', '21:40'];
-const group2Hours = ['01:40', '04:40', '07:40', '10:40', '13:40', '16:40', '19:40', '22:40'];
-const group3Hours = ['02:40', '05:40', '08:40', '11:40', '14:40', '17:40', '20:40', '23:40'];
-// const group4Hours = ['06:30', '10:30', '14:30', '18:30', '22:30', '02:30'];
+const startingGroup = 10;
+const maxGroups = 12;
+const startingHour = "08";
+const startingMinute = "00";
+const minutes = "20"
 
 const messages = [
 	'Lets get those LE',
 	'Farming time 🌼',
 	'Another hour of hard watering! 💦',
 	'It is time to farm!',
-	'Next group in 1 hour',
 	'Long wait? 😁',
+	'Please, no lag :('
 ];
 
 module.exports = {
 	name: 'group-announcer',
 	description: 'Send updates of group',
-	cron: '*/40 * * * *',
+	cron: `*/${minutes} * * * *`,
 	execute: async (client, Discord) => {
 		const guild = client.guilds.cache.get('879653561665986611');
 		const channel = guild.channels.cache.get('879843545165471784');
 
-		const date = moment().utc().format('HH:mm');
+		const date = moment().utc().hour(startingHour).minute(startingMinute);
+        const now = moment().utc();
+        if(date.isAfter(now)) date.subtract(1, "day")
 
-		if (group1Hours.includes(date))
-			return await channel.send(
-				`<@&${'879774447211515944'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
-			);
+        let found = false;
+        let groupCounter = startingGroup;
 
-		if (group2Hours.includes(date))
-			return await channel.send(
-				`<@&${'879774496599445544'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
-			);
+        do {
+            if(date.isAfter(now)) found = true;
+            else {
+                groupCounter++;
+                date.add(minutes, "minutes");
+                if(groupCounter > maxGroups) groupCounter = 1;
+            } 
+        } while (!found)
 
-		if (group3Hours.includes(date))
-			return await channel.send(
-				`<@&${'879774522801291264'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
-			);
+        groupCounter = (groupCounter-1) === 0 ? 12 : groupCounter - 1;
 
-		// if (group4Hours.includes(date))
-		// 	return await channel.send(
-		// 		`<@&${'879979445149130782'}> turn. ${messages[Math.floor(Math.random() * messages.length)]}`
-		// 	);
+		return await channel.send(
+			`:arrow_forward: **Group ${groupCounter}** turn. ${messages[Math.floor(Math.random() * messages.length)]}\nNext group will be in ${minutes} minutes (${moment(date).subtract(minutes, "minutes").format('HH:mm')} UTC)`
+		);
 	},
 };
